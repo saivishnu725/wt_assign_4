@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!preg_match('/^[A-Za-z0-9_]{3,16}$/', $username)) {
-        exit("<span style='color:red;'>Username must be 3–16 characters, no spaces, only letters, digits, or underscores.</span>");
+        exit("<span style='color:red;'>Username must be 3-16 characters, no spaces, only letters, digits, or underscores.</span>");
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $targetFilePath = $targetDir . time() . "_" . $fileName;
     $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
 
-    $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+    $allowed = ['jpg', 'jpeg', 'png'];
     if (in_array($fileType, $allowed)) {
         if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $targetFilePath)) {
             $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, username, dob, email, address, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<span style='color:red;'>File upload failed!</span>";
         }
     } else {
-        echo "<span style='color:red;'>Invalid file type. Only JPG, JPEG, PNG, or GIF allowed.</span>";
+        echo "<span style='color:red;'>Invalid file type. Only JPG, JPEG or PNG allowed.</span>";
     }
 }
 ?>

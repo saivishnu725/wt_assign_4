@@ -32,7 +32,7 @@ document.getElementById("registerForm").addEventListener("submit", function (e) 
     }
 
     if (!/^[A-Za-z0-9_]{3,16}$/.test(username)) {
-        alert("Username must be 3–16 characters long, contain only letters, digits, or underscores, and no spaces.");
+        alert("Username must be 3-16 characters long, contain only letters, digits, or underscores, and no spaces.");
         return;
     }
 
