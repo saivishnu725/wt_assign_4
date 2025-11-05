@@ -4,21 +4,36 @@ document.getElementById("registerForm").addEventListener("submit", function (e) 
     let form = e.target;
     let formData = new FormData(form);
 
-    // Client-side validation
-    let email = form.email.value;
-    let username = form.username.value;
+    // Extract fields
+    let firstName = form.first_name.value.trim();
+    let lastName = form.last_name.value.trim();
+    let username = form.username.value.trim();
+    let email = form.email.value.trim();
     let file = form.profile_pic.files[0];
 
-    if (!/^[a-zA-Z0-9_]{3,16}$/.test(username)) {
-        alert("Username must be 3-16 characters long and contain only letters, numbers, or underscores.");
+    // Validation rules
+    if (!/^[A-Za-z]+$/.test(firstName)) {
+        alert("First name must contain only alphabets (no digits or spaces).");
         return;
     }
+
+    if (!/^[A-Za-z]+$/.test(lastName)) {
+        alert("Last name must contain only alphabets (no digits or spaces).");
+        return;
+    }
+
+    if (!/^[A-Za-z0-9_]{3,16}$/.test(username)) {
+        alert("Username must be 3–16 characters long, contain only letters, digits, or underscores, and no spaces.");
+        return;
+    }
+
     if (!/\S+@\S+\.\S+/.test(email)) {
         alert("Invalid email format!");
         return;
     }
+
     if (file && file.size > 2 * 1024 * 1024) {
-        alert("File size must be under 2MB!");
+        alert("Profile picture must be under 2MB!");
         return;
     }
 

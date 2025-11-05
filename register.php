@@ -10,12 +10,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = trim($_POST['address']);
 
     // Server-side validation
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        exit("Invalid email format!");
+    if (!preg_match('/^[A-Za-z]+$/', $first_name)) {
+        exit("<span style='color:red;'>First name must contain only alphabets (no digits or spaces).</span>");
     }
 
-    if (!preg_match('/^[a-zA-Z0-9_]{3,16}$/', $username)) {
-        exit("Invalid username!");
+    if (!preg_match('/^[A-Za-z]+$/', $last_name)) {
+        exit("<span style='color:red;'>Last name must contain only alphabets (no digits or spaces).</span>");
+    }
+
+    if (!preg_match('/^[A-Za-z0-9_]{3,16}$/', $username)) {
+        exit("<span style='color:red;'>Username must be 3–16 characters, no spaces, only letters, digits, or underscores.</span>");
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        exit("<span style='color:red;'>Invalid email format.</span>");
     }
 
     // Handle file upload
@@ -39,10 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<span style='color:red;'>Error: Username or email already exists.</span>";
             }
         } else {
-            echo "File upload failed!";
+            echo "<span style='color:red;'>File upload failed!</span>";
         }
     } else {
-        echo "Invalid file type!";
+        echo "<span style='color:red;'>Invalid file type. Only JPG, JPEG, PNG, or GIF allowed.</span>";
     }
 }
 ?>
