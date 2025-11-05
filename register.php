@@ -2,8 +2,8 @@
 include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $first_name = trim($_POST['first_name']);
-    $last_name = trim($_POST['last_name']);
+    $first_name = trim($_POST['fname']);
+    $last_name = trim($_POST['lname']);
     $username = trim($_POST['username']);
     $dob = $_POST['dob'];
     $email = trim($_POST['email']);

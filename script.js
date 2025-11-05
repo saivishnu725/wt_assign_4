@@ -5,8 +5,8 @@ document.getElementById("registerForm").addEventListener("submit", function (e) 
     let formData = new FormData(form);
 
     // Extract fields
-    let firstName = form.first_name.value.trim();
-    let lastName = form.last_name.value.trim();
+    let firstName = form.fname.value.trim();
+    let lastName = form.lname.value.trim();
     let username = form.username.value.trim();
     let email = form.email.value.trim();
     let file = form.profile_pic.files[0];
