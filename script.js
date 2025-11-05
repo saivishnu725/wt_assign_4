@@ -12,6 +12,14 @@ document.getElementById("registerForm").addEventListener("submit", function (e) 
     let file = form.profile_pic.files[0];
 
     // Validation rules
+    // date of birth validation
+    document.querySelector("input[name='dob']").max =
+        new Date().toISOString().split("T")[0];
+    // set min to 100 years ago from today
+    let minDate = new Date();
+    minDate.setFullYear(minDate.getFullYear() - 100);
+    document.querySelector("input[name='dob']").min = minDate.toISOString().split("T")[0];
+
     if (!/^[A-Za-z]+$/.test(firstName)) {
         alert("First name must contain only alphabets (no digits or spaces).");
         return;
