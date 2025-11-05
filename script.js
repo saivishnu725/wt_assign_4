@@ -38,14 +38,23 @@ document.getElementById("registerForm").addEventListener("submit", function (e) 
     }
 
     // Send AJAX request
-    fetch("register.php", {
-        method: "POST",
-        body: formData
-    })
-        .then(res => res.text())
-        .then(data => {
-            document.getElementById("response").innerHTML = data;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "register.php", true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            document.getElementById("response").innerHTML = xhr.responseText;
             form.reset();
-        })
-        .catch(err => console.error(err));
+        } else {
+            document.getElementById("response").innerHTML =
+                "<span style='color:red;'>An error occurred while submitting the form.</span>";
+        }
+    };
+
+    xhr.onerror = function () {
+        document.getElementById("response").innerHTML =
+            "<span style='color:red;'>Connection error. Please try again.</span>";
+    };
+
+    xhr.send(formData);
 });
